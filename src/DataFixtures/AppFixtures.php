@@ -11,6 +11,7 @@ namespace App\DataFixtures;
 
 use App\Entity\MicroPost;
 use App\Entity\User;
+use App\Entity\UserPreferences;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -59,7 +60,10 @@ class AppFixtures extends Fixture
         'Did you watch the game yesterday?',
         'How was your day?'
     ];
-
+    private const LANGUAGES = [
+        'en',
+        'fr'
+    ];
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -105,9 +109,14 @@ class AppFixtures extends Fixture
                 $user,
                 $userData['password']));
             $user->setRoles($userData['roles']);
+            $user->setEnable('true');
             $this->addReference($userData['username'], $user);
+            $preferences = new UserPreferences();
+            $preferences->setLocale(self::LANGUAGES[rand(0,1)]);
 
+            $user->setPreferences($preferences);
             $manager->persist($user);
+            $manager->persist($preferences);
         }
 
 

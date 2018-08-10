@@ -1,0 +1,7 @@
+<h3>Welcome</h3>
+
+<p>Hello, {{ user.fullName }}</p> <br><br>
+Pllease confirm your account by clicking this <a href="{{ url('security_confirm', {'token': user.conformationToken}) }}">link</a>
+To login, go to the <a href="{{ url('security_login') }}">Login page</a><br><br>
+
+Thanks!

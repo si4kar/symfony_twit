@@ -22,7 +22,7 @@ class LikesController extends Controller
     {
         /** @var User $currentUser */
         $currentUser =$this->getUser();
-        if ($currentUser instanceof User) {
+        if (!$currentUser instanceof User) {
             return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         }
 
@@ -40,7 +40,7 @@ class LikesController extends Controller
     {
         /** @var User $currentUser */
         $currentUser =$this->getUser();
-        if ($currentUser instanceof User) {
+        if (!$currentUser instanceof User) {
             return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         }
 
